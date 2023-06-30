@@ -1,0 +1,18 @@
+{
+  "name": "vite-router-next",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run build -- --watch",
+    "build": "tsup"
+  },
+  "author": "dacsang97",
+  "devDependencies": {
+    "@types/node": "^20.3.2",
+    "prettier": "^2.8.8",
+    "prettier-plugin-organize-imports": "^3.2.2",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.3"
+  }
+}
