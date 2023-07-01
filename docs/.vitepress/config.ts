@@ -8,6 +8,7 @@ export default defineConfig({
   lang: 'en-US',
   title: 'Vite Router Next',
   description: 'File system based routing for React using Vite',
+  base: '/vite-router-next/',
   themeConfig: {
     nav: nav(),
     socialLinks: [
