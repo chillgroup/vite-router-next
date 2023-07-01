@@ -62,5 +62,57 @@ function sidebarGuide() {
         },
       ],
     },
+    {
+      text: 'Routing',
+      collapsed: false,
+      items: [
+        {
+          text: 'Defining Routes',
+          link: '/guide/defining-routes',
+        },
+        {
+          text: 'Pages and Layouts',
+          link: '/guide/pages-and-layouts',
+        },
+        {
+          text: 'Linking and Navigating',
+          link: '/guide/linking-and-navigating',
+        },
+        {
+          text: 'Route Groups',
+          link: '/guide/route-groups',
+        },
+        {
+          text: 'Dynamic Routes',
+          link: '/guide/dynamic-routes',
+        },
+        {
+          text: 'Catch All Routing',
+          link: '/guide/catch-all-routing',
+        },
+        {
+          text: 'Loading UI',
+          link: '/guide/loading-ui',
+        },
+        {
+          text: 'Error Handling',
+          link: '/guide/error-handling',
+        },
+      ],
+    },
+    {
+      text: 'Data Fetching',
+      collapsed: false,
+      items: [
+        {
+          text: 'Fetching',
+          link: '/guide/data-fetching',
+        },
+        {
+          text: 'With Tanstack Query React',
+          link: '/guide/data-fetching-with-tanstack-query-react',
+        },
+      ],
+    },
   ]
 }

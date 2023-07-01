@@ -55,7 +55,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 Now you can create a `pages` folder and add your routes as files.
 
-### Simple example
+## Simple example
 
 For example, file structure should look like this:
 
