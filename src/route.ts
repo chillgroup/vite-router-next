@@ -1,3 +1,4 @@
+import { slash } from '@antfu/utils'
 import fs from 'fs-extra'
 import path from 'path'
 import React from 'react'
@@ -5,6 +6,7 @@ import { JS_EXTENSIONS, NESTED_ROUTE } from './constants'
 import {
   conventionNames,
   createIndexRoute,
+  createMatchReg,
   createRoute,
   replaceDynamicPath,
 } from './utils/route'
@@ -26,7 +28,7 @@ export type Route = Partial<{
   filename?: string
   _component?: string
   component?: string
-  lazyImport?: () => Promise<any>
+  lazyImport: string | null
   loading?: string
   error?: string
   isRoot?: boolean
@@ -211,4 +213,161 @@ export const walk = async (
   }
 
   return finalRoute
+}
+
+export const generateClientCode = async (routes: Route) => {
+  const components: string[] = []
+  const loadings: string[] = []
+  const errors: string[] = []
+  const loaders: string[] = []
+
+  const loadersMap: Record<
+    string,
+    {
+      routeId: string
+      filePath: string
+      inline: boolean
+    }
+  > = {}
+  const configs: string[] = []
+  const configsMap: Record<string, any> = {}
+
+  let rootLayoutCode = ``
+
+  const traverseRouteTree = (route: Route): Route => {
+    let children: Route['children']
+    if ('children' in route && route.children) {
+      children = route?.children?.map(traverseRouteTree)
+    }
+    let loading: string | undefined
+    let error: string | undefined
+    let loader: string | undefined
+    let config: string | undefined
+    let component = ''
+    let lazyImport = null
+
+    if (route.loading) {
+      loadings.push(route.loading)
+      loading = `loading_${loadings.length - 1}`
+    }
+    if (route.error) {
+      errors.push(route.error)
+      error = `error_${errors.length - 1}`
+    }
+    if (route.loader) {
+      loaders.push(route.loader)
+      const loaderId = loaders.length - 1
+      loader = `loader_${loaderId}`
+      loadersMap[loader] = {
+        routeId: route.id!,
+        filePath: route.loader,
+        inline: false,
+      }
+    }
+    if (typeof route.config === 'string') {
+      configs.push(route.config)
+      const configId = configs.length - 1
+      config = `config_${configId}`
+      configsMap[config] = route.config
+    }
+    if (route._component) {
+      if (route.isRoot) {
+        rootLayoutCode = `import RootLayout from '/${route._component}'`
+        component = `RootLayout`
+      } else {
+        lazyImport = `() => import('/${route._component}')`
+        component = `React.lazy(${lazyImport})`
+      }
+    }
+
+    const finalRoute = {
+      ...route,
+      lazyImport,
+      loading,
+      loader,
+      config,
+      error,
+      children,
+    }
+
+    if (route._component) {
+      finalRoute.component = component
+      finalRoute.element = `React.createElement(${component})`
+    }
+    return finalRoute
+  }
+
+  let routeComponentsCode = `
+    export const routes = [
+  `
+
+  const newRoute = traverseRouteTree(routes)
+  const routeStr = JSON.stringify(newRoute, null, 2)
+  const keywords = [
+    'component',
+    'lazyImport',
+    'loader',
+    'loading',
+    'error',
+    'config',
+    'element',
+  ]
+
+  const regs = keywords.map(createMatchReg)
+  const newRouteStr = regs
+    .reduce((acc, reg) => acc.replace(reg, '$1$2'), routeStr)
+    .replace(/"(RootLayout)"/g, '$1')
+    .replace(/\\"/g, '"')
+  routeComponentsCode += `${newRouteStr},`
+  routeComponentsCode += `\n];`
+
+  const importLoadingCode = loadings
+    .map((loading, index) => {
+      return `import loading_${index} from '${loading}';\n`
+    })
+    .join('')
+
+  const importComponentsCode = components
+    .map((component, index) => {
+      return `import component_${index} from '/${component}';\n`
+    })
+    .join('')
+
+  const importErrorComponentsCode = errors
+    .map((error, index) => {
+      return `import error_${index} from '/${error}';\n`
+    })
+    .join('')
+
+  let importLoadersCode = ''
+
+  for (const [key, loaderInfo] of Object.entries(loadersMap)) {
+    if (loaderInfo.inline) {
+      importLoadersCode += `import { loader as ${key} } from "/${slash(
+        loaderInfo.filePath
+      )}";\n`
+    } else {
+      importLoadersCode += `import ${key} from "/${slash(
+        loaderInfo.filePath
+      )}";\n`
+    }
+  }
+
+  let importConfigsCode = ''
+
+  for (const [key, configPath] of Object.entries(configsMap)) {
+    importConfigsCode += `import * as ${key} from "/${slash(configPath)}";\n`
+  }
+
+  return `
+    import React from "react";
+    ${importComponentsCode}
+    ${rootLayoutCode}
+    ${importLoadingCode}
+    ${importErrorComponentsCode}
+    ${importLoadersCode}
+    ${importConfigsCode}
+    ${routeComponentsCode}
+    export default routes
+  `
 }

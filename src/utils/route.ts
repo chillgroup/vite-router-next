@@ -77,3 +77,6 @@ export const createIndexRoute = (
     filename
   )
 }
+
+export const createMatchReg = (keyword: string) =>
+  new RegExp(`("${keyword}":\\s)"([^,]+)"`, 'g')

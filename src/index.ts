@@ -24,8 +24,7 @@ function routerNextPlugin(options: Options): Plugin {
     },
     async load(id) {
       if (id === MODULE_ID_VIRTUAL) {
-        // TODO: generate routes
-        return `export default []`
+        return ctx.generateClientCode()
       }
     },
   }

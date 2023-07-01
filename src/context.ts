@@ -1,7 +1,7 @@
 import { slash } from '@antfu/utils'
 import { Logger, ViteDevServer } from 'vite'
 import { Options, resolveOptions } from './option'
-import { Route, walk } from './route'
+import { Route, generateClientCode, walk } from './route'
 import { debug } from './utils/debug'
 
 export class PageContext {
@@ -30,5 +30,13 @@ export class PageContext {
   async walk() {
     this._route = await walk(this.options.dir, this.root)
     console.log(JSON.stringify(this._route, null, 2))
+  }
+
+  async generateClientCode() {
+    if (this._route) {
+      return generateClientCode(this._route)
+    }
+
+    return `export default []`
   }
 }
