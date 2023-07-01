@@ -2,6 +2,9 @@ export const MODULE_ID = 'vite-router-next/routes'
 export const MODULE_ID_VIRTUAL = '/@vite-router-next/routes'
 
 export const JS_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
+export const JS_EXTENSIONS_RE = new RegExp(
+  `\\.(${JS_EXTENSIONS.map((ext) => ext.slice(1)).join('|')})$`
+)
 export const FILE_SYSTEM_ROUTES_LAYOUT = '_layout'
 export const FILE_SYSTEM_ROUTES_IGNORED_REGEX =
   /\.(d|test|spec|e2e)\.(js|jsx|ts|tsx)$/
