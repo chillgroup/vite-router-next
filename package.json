@@ -14,7 +14,8 @@
     },
     "./routes": {
       "types": "./routes.d.ts"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
@@ -26,7 +27,9 @@
     "play": "pnpm --filter react dev",
     "prepublishOnly": "npm run build",
     "release": "bumpp --commit --tag --push",
-    "publish:ci": "esno scripts/publish.ts"
+    "publish:ci": "esno scripts/publish.ts",
+    "docs:dev": "pnpm --filter docs dev",
+    "docs:build": "pnpm --filter docs build"
   },
   "devDependencies": {
     "@antfu/utils": "^0.7.4",

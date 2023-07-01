@@ -1,0 +1,15 @@
+{
+  "name": "docs",
+  "private": "true",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "vitepress": "1.0.0-beta.3",
+    "@chillgroup/vite-router-next": "workspace:*"
+  }
+}
