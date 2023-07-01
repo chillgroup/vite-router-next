@@ -2,6 +2,9 @@
 
 > Vite Router Next is file system based routing for React using Vite
 
+## Documentation
+To check out docs, visit [https://chillgroup.github.io/vite-router-next/](https://chillgroup.github.io/vite-router-next/)
+
 ## Features
 
 Vite Router Next supports the following features:
