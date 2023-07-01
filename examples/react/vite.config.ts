@@ -1,6 +1,6 @@
+import routerNext from '@chillgroup/vite-router-next'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
-import routerNext from 'vite-router-next'
 
 // https://vitejs.dev/config/
 export default defineConfig({

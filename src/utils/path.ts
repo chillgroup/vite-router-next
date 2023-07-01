@@ -30,6 +30,5 @@ export const isPageDir = (path: string, option: Options) => {
 }
 
 export const isTarget = (path: string, option: Options) => {
-  console.log(JS_EXTENSIONS_RE.test(path))
   return isPageDir(path, option) && JS_EXTENSIONS_RE.test(path)
 }

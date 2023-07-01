@@ -11,7 +11,7 @@ export interface Options {
   dir: string
 }
 
-export const resolveOptions = (options: Options, root: string): Options => {
+export const resolveOptions = (root: string, options?: Options): Options => {
   return {
     root: options?.root ?? root,
     dir: options?.dir ?? 'src/pages',

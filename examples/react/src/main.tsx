@@ -1,7 +1,7 @@
+import routes from '@chillgroup/vite-router-next/routes'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import routes from 'vite-router-next/routes'
 
 const router = createBrowserRouter(routes)
 

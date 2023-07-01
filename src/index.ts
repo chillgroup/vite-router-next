@@ -1,14 +1,16 @@
 import type { Plugin } from 'vite'
 import { MODULE_ID, MODULE_ID_VIRTUAL } from './constants'
 import { PageContext } from './context'
-import { Options } from './option'
+import { Options, resolveOptions } from './option'
 
-function routerNextPlugin(options: Options): Plugin {
+function routerNextPlugin(userOptions?: Options): Plugin {
   let ctx: PageContext
   return {
     name: 'vite-router-next',
     enforce: 'pre',
     async configResolved(config) {
+      const options = resolveOptions(config.root, userOptions)
+
       ctx = new PageContext(options, config.root)
       ctx.setLogger(config.logger)
       await ctx.walk()

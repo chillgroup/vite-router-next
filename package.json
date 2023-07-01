@@ -1,5 +1,5 @@
 {
-  "name": "vite-router-next",
+  "name": "@chillgroup/vite-router-next",
   "author": "dacsang97",
   "version": "1.0.0",
   "description": "",
@@ -17,7 +17,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "routes.d.ts"
   ],
   "scripts": {
     "dev": "npm run build -- --watch --ignore-watch examples",

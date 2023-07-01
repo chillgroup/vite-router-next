@@ -1,5 +1,5 @@
-export const MODULE_ID = 'vite-router-next/routes'
-export const MODULE_ID_VIRTUAL = '/@vite-router-next/routes'
+export const MODULE_ID = '@chillgroup/vite-router-next/routes'
+export const MODULE_ID_VIRTUAL = '/@chillgroup/@vite-router-next/routes'
 
 export const JS_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
 export const JS_EXTENSIONS_RE = new RegExp(

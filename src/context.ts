@@ -1,6 +1,6 @@
 import { slash } from '@antfu/utils'
 import { FSWatcher, Logger, ViteDevServer } from 'vite'
-import { Options, resolveOptions } from './option'
+import { Options } from './option'
 import { Route, generateClientCode, walk } from './route'
 import { debug } from './utils/debug'
 import { isTarget } from './utils/path'
@@ -16,7 +16,7 @@ export class PageContext {
 
   constructor(options: Options, viteRoot: string = process.cwd()) {
     this.root = slash(viteRoot)
-    this.options = resolveOptions(options, this.root)
+    this.options = options
     debug.options(this.options)
   }
 
@@ -32,7 +32,6 @@ export class PageContext {
 
   async walk() {
     this._route = await walk(this.options.dir, this.root)
-    console.log(JSON.stringify(this._route, null, 2))
   }
 
   async generateClientCode() {
