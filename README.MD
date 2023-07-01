@@ -2,6 +2,23 @@
 
 > Vite Router Next is file system based routing for React using Vite
 
+## Features
+
+Vite Router Next supports the following features:
+
+- Dynamic Routing
+- Dynamic Optional Routing
+- Catch All Routing
+- No-path Layout
+- Loading
+- [Error Boundary](https://reactrouter.com/en/main/route/route#errorelementerrorboundary)
+- [Loader](https://reactrouter.com/en/main/route/loader), [`useLoaderData`](https://reactrouter.com/en/main/hooks/use-loader-data) and [`defer`](https://reactrouter.com/en/main/guides/deferred)
+
+> [Lazy loading](https://reactrouter.com/en/main/route/lazy) is default in Vite Router Next. It keeps your bundle size small and only loads the code for the route the user is on.
+
+> Vite Router Next use `loader` API, so you must use new routers from `react-router-dom@6.4` and above.
+> `createBrowserRouter`, `createMemoryRouter`, `createHashRouter`, `createStaticRouter`
+
 ## Getting Started
 
 ### Install
@@ -43,20 +60,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 ```
 
 Now you can create a `pages` folder and add your routes as files.
-
-### Overview
-
-### Features
-
-Vite Router Next supports the following features:
-
-- Dynamic Routing
-- Dynamic Optional Routing
-- Catch All Routing
-- No-path Layout
-- Loading
-- Error Boundary
-- Loader & `useDataLoader`
 
 ### Details
 
