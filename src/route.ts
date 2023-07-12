@@ -2,6 +2,7 @@ import { slash } from '@antfu/utils'
 import fs from 'fs-extra'
 import path from 'path'
 import React from 'react'
+import { normalizePath } from 'vite'
 import { JS_EXTENSIONS, NESTED_ROUTE } from './constants'
 import {
   conventionNames,
@@ -204,7 +205,9 @@ export const walk = async (
   ) {
     const childRoute = finalRoute.children[0]
     if (childRoute.path === '*') {
-      const path = `${finalRoute.path || ''}/${childRoute.path || ''}`
+      const path = normalizePath(
+        `${finalRoute.path || ''}/${childRoute.path || ''}`
+      )
       finalRoute = {
         ...childRoute,
         path,
@@ -272,10 +275,12 @@ export const generateClientCode = async (routes: Route) => {
     }
     if (route._component) {
       if (route.isRoot) {
-        rootLayoutCode = `import RootLayout from '/${route._component}'`
+        rootLayoutCode = normalizePath(
+          `import RootLayout from '/${route._component}'`
+        )
         component = `RootLayout`
       } else {
-        lazyImport = `() => import('/${route._component}')`
+        lazyImport = normalizePath(`() => import('/${route._component}')`)
         component = `React.lazy(${lazyImport})`
       }
     }
