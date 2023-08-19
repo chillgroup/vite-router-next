@@ -15,8 +15,8 @@ importers:
         specifier: ^11.1.1
         version: 11.1.1
       type-fest:
-        specifier: ^3.12.0
-        version: 3.12.0
+        specifier: ^4.0.0
+        version: 4.0.0
       upath:
         specifier: ^2.0.1
         version: 2.0.1
@@ -2967,9 +2967,9 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /type-fest@3.12.0:
-    resolution: {integrity: sha512-qj9wWsnFvVEMUDbESiilKeXeHL7FwwiFcogfhfyjmvT968RXSvnl23f1JOClTHYItsi7o501C/7qVllscUP3oA==}
-    engines: {node: '>=14.16'}
+  /type-fest@4.0.0:
+    resolution: {integrity: sha512-d/oYtUnPM9zar2fqqGLYPzgcY0qUlYK0evgNVti93xpzfjGkMgZHu9Lvgrkn0rqGXTgsFRxFamzjGoD9Uo+dgw==}
+    engines: {node: '>=16'}
     dev: false
 
   /typescript@5.1.3:
