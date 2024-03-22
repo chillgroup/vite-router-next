@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "devDependencies": {
-    "vitepress": "1.0.0-beta.3",
+    "vitepress": "1.0.1",
     "@chillgroup/vite-router-next": "workspace:*"
   }
 }
