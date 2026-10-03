@@ -38,7 +38,7 @@
     "@types/node": "^20.3.2",
     "@types/react": "^18.0.37",
     "bumpp": "^9.1.1",
-    "esno": "^0.16.3",
+    "esno": "^4.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
     "react": "^18.2.0",
